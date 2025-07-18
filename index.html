@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Taj Mahal Fun Facts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Merriweather', Georgia, serif;
+      /* Taj Mahal background image with a dark overlay for readability */
+      background:
+        linear-gradient(rgba(30,30,30,0.6), rgba(30,30,30,0.6)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: rgba(255,255,255,0.15);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 2rem 1.5rem;
+      max-width: 500px;
+      text-align: center;
+      margin: 2rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ffe082;
+      letter-spacing: 1px;
+    }
+    #fact-box {
+      font-size: 1.2rem;
+      margin: 1.5rem 0;
+      color: #fffde7;
+      min-height: 60px;
+      transition: color 0.3s;
+    }
+    .btn {
+      background: #1565c0;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      margin: 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.15);
+    }
+    .btn:hover {
+      background: #ffd54f;
+      color: #222;
+    }
+    .social-btns {
+      margin-top: 1rem;
+    }
+    .social-btns .btn {
+      background: #1da1f2;
+      color: #fff;
+    }
+    .social-btns .btn.linkedin {
+      background: #0077b5;
+    }
+    .social-btns .btn:hover {
+      background: #ffd54f;
+      color: #222;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 1rem 0.5rem;
+        max-width: 95vw;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      #fact-box {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Taj Mahal Fun Facts</h1>
+    <div id="fact-box">Click the button to see a fun fact!</div>
+    <button class="btn" id="new-fact-btn">Show Me a Fact</button>
+    <div class="social-btns">
+      <button class="btn" id="twitter-btn">Share on Twitter</button>
+      <button class="btn linkedin" id="linkedin-btn">Share on LinkedIn</button>
+    </div>
+  </div>
+  <script>
+    // Fun facts array (from your previous message)
+    const facts = [
+      { "fact": "The Taj Mahal changes color throughout the day, appearing pinkish in the morning, milky white at noon, and golden under moonlight." },
+      { "fact": "The minarets of the Taj Mahal are intentionally tilted slightly outward to protect the main tomb in case of an earthquake." },
+      { "fact": "The calligraphy on the Taj Mahal gets larger as it goes higher, creating an optical illusion of uniform size from the ground." },
+      { "fact": "Twenty-eight types of precious and semi-precious stones from all over Asia were inlaid into the marble of the Taj Mahal." },
+      { "fact": "The Taj Mahal’s gardens are laid out in a Persian-style charbagh, but the tomb is placed at the end rather than the center—an unusual design choice." },
+      { "fact": "During World War II and the India-Pakistan wars, the Taj Mahal was covered with scaffolding to disguise it from potential air attacks." },
+      { "fact": "The Taj Mahal’s foundation is made of timber, which is kept strong by the moisture from the nearby Yamuna River." },
+      { "fact": "The cenotaphs inside the Taj Mahal are empty; the real graves of Mumtaz Mahal and Shah Jahan are in a lower, less ornate chamber." },
+      { "fact": "The intricate marble screens inside the Taj Mahal are carved so finely that they appear almost like delicate lace." },
+      { "fact": "A small, mysterious hole in the ceiling of the main hall is said to have been made by a worker to curse the monument, ensuring it would never be perfect." }
+    ];
+
+    let lastFactIndex = -1;
+
+    function getRandomFactIndex() {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * facts.length);
+      } while (idx === lastFactIndex && facts.length > 1);
+      lastFactIndex = idx;
+      return idx;
+    }
+
+    function showRandomFact() {
+      const idx = getRandomFactIndex();
+      const fact = facts[idx].fact;
+      document.getElementById('fact-box').textContent = fact;
+      updateShareLinks(fact);
+    }
+
+    function updateShareLinks(fact) {
+      // Twitter
+      const tweetText = encodeURIComponent(fact + " #TajMahal #FunFact");
+      document.getElementById('twitter-btn').onclick = () => {
+        window.open(`https://twitter.com/intent/tweet?text=${tweetText}`, '_blank');
+      };
+      // LinkedIn
+      const linkedInText = encodeURIComponent(fact);
+      const shareUrl = encodeURIComponent(window.location.href);
+      document.getElementById('linkedin-btn').onclick = () => {
+        window.open(
+          `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}&title=${linkedInText}`,
+          '_blank'
+        );
+      };
+    }
+
+    // Initial setup
+    document.getElementById('new-fact-btn').addEventListener('click', showRandomFact);
+    // Show a fact on first load
+    showRandomFact();
+  </script>
+</body>
+</html>
