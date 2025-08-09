@@ -38,7 +38,7 @@ Built using **HTML**, **CSS**, and **JavaScript**, with a glassmorphism effect o
 
 ### 1️⃣ Clone or Download
 ```
-git clone https://github.com/your-username/taj-mahal-fun-facts.git
+git clone https://github.com/waveri/taj-mahal-fun-facts.git
 cd taj-mahal-fun-facts
 ```
 
